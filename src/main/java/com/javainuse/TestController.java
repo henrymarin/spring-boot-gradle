@@ -22,21 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.mypurecloud.sdk.v2.ApiException;
+import com.mypurecloud.sdk.v2.api.AuthorizationApi;
+import com.mypurecloud.sdk.v2.model.OrganizationProductEntityListing;
 
 import net.minidev.json.JSONObject;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
-
-import com.mypurecloud.sdk.v2.ApiClient;
-import com.mypurecloud.sdk.v2.ApiException;
-import com.mypurecloud.sdk.v2.Configuration;
-import com.mypurecloud.sdk.v2.auth.*;
-import com.mypurecloud.sdk.v2.model.OrganizationProductEntityListing;
-import com.mypurecloud.sdk.v2.model.PermissionCollectionEntityListing;
-import com.mypurecloud.sdk.v2.model.PureCloud;
-import com.mypurecloud.sdk.v2.api.AuthorizationApi;
 
 @RestController
 public class TestController {
@@ -135,20 +128,16 @@ public class TestController {
 	
 	
 	@RequestMapping(
-			value = "/autorizar", 
+			value = "/llamarPC", 
 			method = RequestMethod.GET, 
 			produces=APPLICATION_JSON)
-	public IniciarResponse autorizarUsuario() {		
+	public IniciarResponse llamarPC() {		
+		//--
 		IniciarResponse rta = new IniciarResponse();
 		List<Person> listaDePersonas = pPersonRepository.findAll();
 		rta.setId("00000_X");
 		rta.setNombre("00000_Y");
-		rta.setPersonas(listaDePersonas);
-		
-		
-		
-		
-		
+		rta.setPersonas(listaDePersonas);		
 		//--
 		AuthorizationApi apiInstance = new AuthorizationApi();
 		try {
@@ -158,8 +147,7 @@ public class TestController {
 		    System.err.println("Exception when calling AuthorizationApi#getAuthorizationProducts");
 		    e.printStackTrace();
 		}
-		
-		
+		//--		
 		return rta;
 	}
 	
