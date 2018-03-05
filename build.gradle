@@ -68,6 +68,8 @@ dependencies {
 	compile group: 'org.jxls', name: 'jxls', version: '2.2.9'
 	compile group: 'org.jxls', name: 'jxls-poi', version: '1.0.9'
 	compile group: 'org.jxls', name: 'jxls-reader', version: '2.0.2'
+	// https://mvnrepository.com/artifact/com.mypurecloud/platform-client-v2
+	compile group: 'com.mypurecloud', name: 'platform-client-v2', version: '3.1.0'	
 
 }
 

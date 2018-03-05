@@ -22,10 +22,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import net.minidev.json.JSONObject;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
+
+import com.mypurecloud.sdk.v2.ApiClient;
+import com.mypurecloud.sdk.v2.ApiException;
+import com.mypurecloud.sdk.v2.Configuration;
+import com.mypurecloud.sdk.v2.auth.*;
+import com.mypurecloud.sdk.v2.model.OrganizationProductEntityListing;
+import com.mypurecloud.sdk.v2.model.PermissionCollectionEntityListing;
+import com.mypurecloud.sdk.v2.model.PureCloud;
+import com.mypurecloud.sdk.v2.api.AuthorizationApi;
 
 @RestController
 public class TestController {
@@ -120,6 +131,36 @@ public class TestController {
 		} catch (IOException e) {
 
 		}
+	}
+	
+	
+	@RequestMapping(
+			value = "/autorizar", 
+			method = RequestMethod.GET, 
+			produces=APPLICATION_JSON)
+	public IniciarResponse autorizarUsuario() {		
+		IniciarResponse rta = new IniciarResponse();
+		List<Person> listaDePersonas = pPersonRepository.findAll();
+		rta.setId("00000_X");
+		rta.setNombre("00000_Y");
+		rta.setPersonas(listaDePersonas);
+		
+		
+		
+		
+		
+		//--
+		AuthorizationApi apiInstance = new AuthorizationApi();
+		try {
+		    OrganizationProductEntityListing result = apiInstance.getAuthorizationProducts();
+		    System.out.println(result);
+		} catch (ApiException | IOException e) {
+		    System.err.println("Exception when calling AuthorizationApi#getAuthorizationProducts");
+		    e.printStackTrace();
+		}
+		
+		
+		return rta;
 	}
 	
 }
